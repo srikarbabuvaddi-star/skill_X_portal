@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Register | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card glass-card border-0 shadow-lg p-4 p-md-5">
+            <div class="mb-4 text-center">
+                <h2 class="fw-bold">Create your account</h2>
+                <p class="text-secondary mb-0">Join Skill_X to learn, teach, and collaborate.</p>
+            </div>
+            <form method="POST" novalidate>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger rounded-4">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                        <div class="form-text text-danger">{{ field.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Register</button>
+            </form>
+            <div class="text-center mt-3">
+                <span class="text-secondary">Already have an account? <a href="{% url 'login' %}" class="text-primary">Sign in</a>.</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Detail</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <h1>Report Detail</h1>
+    <p><strong>User:</strong> {{ report.user.username }}</p>
+    <p><strong>Timestamp:</strong> {{ report.timestamp }}</p>
+    <div>
+        <strong>Action</strong>
+        <p>{{ report.action }}</p>
+    </div>
+    <p><a href="{% url 'user_activity_reports' %}">Back to reports</a></p>
+</body>
+</html>

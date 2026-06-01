@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share Skills</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1 class="glitch">🌐 Share Your Skills</h1>
+        <nav>
+            <a href="{% url 'skill_list' %}">Skills</a> |
+            <a href="{% url 'progress' %}">Progress</a> |
+            <a href="{% url 'tracker' %}">Tracker</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <p>Choose a platform to share:</p>
+        <button onclick="window.open('https://twitter.com/intent/tweet?text=Check+out+my+skills!', '_blank')">Twitter</button>
+        <button onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:8000', '_blank')">LinkedIn</button>
+        <button onclick="window.location.href='mailto:?subject=My Skills&body=Check out my skills at http://localhost:8000'">Email</button>
+        <button onclick="window.open('https://api.whatsapp.com/send?text=Check%20out%20my%20skills%20http://localhost:8000', '_blank')">WhatsApp</button>
+        <button onclick="copyLink()">Copy Link</button>
+    </div>
+</body>
+</html>

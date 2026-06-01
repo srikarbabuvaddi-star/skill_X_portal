@@ -1,0 +1,124 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: #1abc9c;
+}
+
+.navbar .right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .right span {
+    margin-right: 1rem;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dashboard-container h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+.dashboard-section h3 {
+    margin-bottom: 1rem;
+    color: #34495e;
+}
+
+.dashboard-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-section ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.dashboard-section ul li:last-child {
+    border-bottom: none;
+}
+
+.dashboard-section p {
+    color: #777;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #16a085;
+}
+
+.btn-secondary {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #2980b9;
+}
+
+/* Notifications Icon */
+.notification-icon {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.notification-icon:hover {
+    color: #1abc9c;
+}

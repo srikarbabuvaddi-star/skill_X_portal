@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card glass-card border-0 shadow-lg p-4 p-md-5">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold text-dark">Sign in to Skill_X</h3>
+                <p class="text-secondary small">Enter your credentials to continue.</p>
+            </div>
+            <form method="POST" novalidate>
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger rounded-4">
+                    Please fix the errors below.
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label class="form-label text-secondary small fw-medium" for="id_username">Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <div class="form-text text-danger">{{ form.username.errors|join:", " }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-secondary small fw-medium" for="id_password">Password</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                    <div class="form-text text-danger">{{ form.password.errors|join:", " }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-dark w-100 rounded-pill py-2 fw-bold shadow-sm">Sign In</button>
+            </form>
+            <div class="text-center mt-3">
+                <span class="text-muted small">New here? <a href="{% url 'register' %}" class="text-info text-decoration-none fw-medium">Create account</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

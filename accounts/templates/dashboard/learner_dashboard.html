@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Learner Dashboard{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-12">
+        <div class="card feature-card p-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                <div>
+                    <p class="section-chip mb-3"><i class="bi bi-graph-up-arrow"></i> Dashboard</p>
+                    <h2 class="fw-bold mb-2">Welcome back, {{ user.username }}.</h2>
+                    <p class="text-secondary mb-0">Here’s a quick overview of your learning progress, upcoming events, messages, and milestones.</p>
+                </div>
+                <a href="{% url 'list_skills' %}" class="btn btn-primary btn-lg rounded-pill px-4">Explore Skills</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card feature-card h-100 p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h3 class="h5 fw-semibold mb-1">Courses</h3>
+                    <p class="text-secondary small mb-0">Active learning journeys</p>
+                </div>
+                <span class="badge bg-info text-dark badge-pill">{{ courses|length }}</span>
+            </div>
+            {% if courses %}
+                <ul class="list-unstyled mb-0">
+                    {% for course in courses|slice:":3" %}
+                        <li class="mb-3">
+                            <strong>{{ course.title }}</strong>
+                            <div class="progress rounded-pill" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ course.progress }}%;" aria-valuenow="{{ course.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="text-secondary">{{ course.progress }}% complete</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-secondary mb-0">No course enrollments yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card feature-card h-100 p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h3 class="h5 fw-semibold mb-1">Events</h3>
+                    <p class="text-secondary small mb-0">Upcoming sessions</p>
+                </div>
+                <span class="badge bg-success text-dark badge-pill">{{ events|length }}</span>
+            </div>
+            {% if events %}
+                <ul class="list-unstyled mb-0">
+                    {% for event in events|slice:":3" %}
+                        <li class="mb-3">
+                            <strong>{{ event.name }}</strong>
+                            <div class="text-secondary small">{{ event.date|date:"M d, Y" }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-secondary mb-0">No scheduled events.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card feature-card h-100 p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h3 class="h5 fw-semibold mb-1">Messages</h3>
+                    <p class="text-secondary small mb-0">Recent conversations</p>
+                </div>
+                <span class="badge bg-warning text-dark badge-pill">{{ messages|length }}</span>
+            </div>
+            {% if messages %}
+                <ul class="list-unstyled mb-0">
+                    {% for message in messages|slice:":3" %}
+                        <li class="mb-3">
+                            <strong>{{ message.sender }}</strong>
+                            <div class="text-secondary small">{{ message.text|truncatechars:50 }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-secondary mb-0">No new messages.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card feature-card h-100 p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h3 class="h5 fw-semibold mb-1">Achievements</h3>
+                    <p class="text-secondary small mb-0">Badges and milestones</p>
+                </div>
+                <span class="badge bg-secondary text-white badge-pill">{{ achievements|length }}</span>
+            </div>
+            {% if achievements %}
+                <ul class="list-unstyled mb-0">
+                    {% for achievement in achievements|slice:":3" %}
+                        <li class="mb-3">
+                            <strong>{{ achievement.title }}</strong>
+                            <div class="text-secondary small">{{ achievement.date|date:"M d, Y" }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-secondary mb-0">No achievements earned yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

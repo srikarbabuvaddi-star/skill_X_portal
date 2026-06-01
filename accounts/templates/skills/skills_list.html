@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Skills Showcase{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-5">
+    <div class="col-lg-8">
+        <p class="section-chip mb-3"><i class="bi bi-lightning-charge-fill"></i> Skill showcase</p>
+        <h1 class="display-6 fw-bold">Discover active capabilities and shared expertise.</h1>
+        <p class="lead hero-subtitle">Browse curated skill cards, filter instantly, and connect with creators who can help you grow.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+        <a href="{% url 'create_skill' %}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
+            <i class="bi bi-plus-circle-fill me-2"></i> Add a skill
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% if skills %}
+        {% for skill in skills %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card feature-card h-100 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-primary text-white badge-pill">{{ skill.category|default:'General' }}</span>
+                        <span class="text-muted small"><i class="bi bi-clock"></i> {{ skill.created_at|date:'M d' }}</span>
+                    </div>
+                    <h3 class="h5 fw-bold mb-2">{{ skill.title }}</h3>
+                    <p class="text-secondary small mb-4">{{ skill.description|truncatewords:24 }}</p>
+                    <div class="mt-auto">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="text-muted small">
+                                <i class="bi bi-person-circle"></i> {{ skill.owner.username }}
+                            </div>
+                            <div class="text-muted small"><i class="bi bi-star-fill text-warning"></i> {{ skill.rating|default:'4.8' }}</div>
+                        </div>
+                        <a href="{% url 'skill_detail' skill.id %}" class="btn btn-outline-primary rounded-pill px-4">View details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="card feature-card text-center p-5">
+                <i class="bi bi-emoji-frown display-4 text-secondary"></i>
+                <p class="mt-3 mb-0 text-secondary">No skill listings found yet. Start by sharing your knowledge with the community.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

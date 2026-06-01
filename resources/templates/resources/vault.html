@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Resource Vault | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="fw-bold">Resource Vault</h1>
+        <p class="text-secondary">Share and discover helpful course materials and links.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card feature-card p-4">
+            <h4 class="fw-semibold mb-3">Add new material</h4>
+            <form method="post" class="row g-3">
+                {% csrf_token %}
+                <div class="col-12"> {{ form.title.label_tag }} {{ form.title }} </div>
+                <div class="col-12"> {{ form.resource_link.label_tag }} {{ form.resource_link }} </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        {% if vault %}
+            <div class="row g-3">
+                {% for item in vault %}
+                    <div class="col-12">
+                        <div class="card h-100 p-4 feature-card">
+                            <h5 class="mb-2">{{ item.title }}</h5>
+                            <p class="text-secondary mb-2"><a href="{{ item.resource_link }}" target="_blank">Open resource</a></p>
+                            <p class="small text-muted mb-0">Uploaded by {{ item.uploader.username }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card feature-card p-5 text-center">
+                <h3 class="h5">No resources found</h3>
+                <p class="text-secondary mb-0">Add the first material to share with the community.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-xl-8">
+        <div class="card glass-card shadow-lg border-0 overflow-hidden">
+            <div class="card-header bg-dark p-4 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-chat-left-dots-fill text-info fs-3 me-3"></i>
+                    <div>
+                        <h5 class="m-0 text-white fw-bold">Secure Swap Shell Terminal</h5>
+                        <small class="text-success fw-medium" id="ws-status"><i class="bi bi-check-circle-fill me-1"></i>WebSockets Online</small>
+                    </div>
+                </div>
+                <a href="{% url 'launch_video_ui' room_token %}" class="btn btn-sm btn-danger rounded-pill px-3 fw-bold shadow"><i class="bi bi-camera-video-fill me-1"></i> Start Video</a>
+            </div>
+            
+            <div class="card-body bg-light p-4" id="chat-scroller" style="height: 400px; overflow-y: auto;">
+                {% for msg in logs %}
+                <div class="mb-3 d-flex {% if msg.author == request.user %}justify-content-end{% endif %}">
+                    <div class="p-3 rounded-3 shadow-sm {% if msg.author == request.user %}bg-primary text-white{% else %}bg-white text-dark{% endif %}" style="max-width: 75%;">
+                        <div class="extra-small opacity-75 fw-bold mb-1" style="font-size:0.7rem;">{{ msg.author.username }}</div>
+                        <p class="m-0 small">{{ msg.content }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="card-footer bg-white p-3 border-top">
+                <div class="input-group">
+                    <input type="text" id="msg-input" class="form-control border-secondary-subtle px-3" placeholder="Type exchange proposal details directly...">
+                    <button class="btn btn-dark px-4" id="msg-send-btn" type="button"><i class="bi bi-send-fill"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const token = "{{ room_token }}";
+    const user = "{{ request.user.username }}";
+    
+    // Core dynamic pipeline script link layer for ASGI mapping loops
+    const ws = new WebSocket((window.location.protocol === 'https:') ? 'wss://' : 'ws://' + window.location.host + '/ws/chat/' + token + '/');
+    const box = document.getElementById('chat-scroller');
+    box.scrollTop = box.scrollHeight;
+
+    ws.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const self = (data.username === user);
+        
+        const cardMarkup = `
+            <div class="mb-3 d-flex ${self ? 'justify-content-end' : ''}">
+                <div class="p-3 rounded-3 shadow-sm ${self ? 'bg-primary text-white' : 'bg-white text-dark'}" style="max-width: 75%;">
+                    <div class="extra-small opacity-75 fw-bold mb-1" style="font-size:0.7rem;">${data.username}</div>
+                    <p class="m-0 small">${data.message}</p>
+                </div>
+            </div>`;
+        box.innerHTML += cardMarkup;
+        box.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
+    };
+
+    document.getElementById('msg-send-btn').onclick = function() {
+        const input = document.getElementById('msg-input');
+        if(!input.value.trim()) return;
+        ws.send(json.stringify({ 'message': input.value, 'username': user }));
+        input.value = '';
+    };
+</script>
+{% endblock %}

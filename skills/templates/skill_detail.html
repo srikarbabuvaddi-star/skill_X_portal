@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ skill.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ skill.name }}</h1>
+        <nav>
+            <a href="{% url 'skill_list' %}">Back to Skills</a>
+        </nav>
+    </header>
+    <div class="container">
+        <p>{{ skill.description }}</p>
+        <p><strong>Created at:</strong> {{ skill.created_at }}</p>
+    </div>
+</body>
+</html>

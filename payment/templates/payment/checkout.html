@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Funding Checkout | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card feature-card p-4 shadow-sm">
+            <h2 class="fw-bold mb-3">Fund your Skill_X account</h2>
+            <p class="text-secondary mb-4">Enter the amount you want to add so you can use premium features and support creators.</p>
+            <form method="post" class="row g-3">
+                {% csrf_token %}
+                <div class="col-12">
+                    <label for="funding_value" class="form-label">Amount</label>
+                    <input type="number" step="0.01" min="1" name="funding_value" id="funding_value" class="form-control" placeholder="50.00" required>
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">Checkout</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Vault - Skill_X</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+        .add-resource-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .add-resource-btn:hover {
+            background: #764ba2;
+        }
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .resource-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .resource-card:hover {
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .resource-title {
+            font-weight: bold;
+            color: #333;
+            margin: 0.5rem 0;
+        }
+        .resource-type {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        .resource-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Resource Vault</h1>
+            <button class="add-resource-btn" onclick="alert('Add resource feature coming soon!')">+ Add Resource</button>
+        </div>
+        
+        {% if vault %}
+            <div class="resource-grid">
+                {% for item in vault %}
+                    <div class="resource-card">
+                        <div class="resource-icon">📄</div>
+                        <p class="resource-title">{{ item }}</p>
+                        <p class="resource-type">Learning Material</p>
+                        <p class="resource-description">Curated resource for skill development</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>Your resource vault is empty. Add resources to get started!</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Groups | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="fw-bold">Learning groups</h1>
+        <p class="text-secondary">Browse communities and join collaborators who are working on similar learning goals.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% if hubs %}
+        {% for hub in hubs %}
+            <div class="col-md-6 col-xl-4">
+                <div class="card feature-card h-100 p-4">
+                    <h4 class="fw-semibold">{{ hub.title }}</h4>
+                    <p class="text-secondary mb-3">{{ hub.about|truncatechars:120 }}</p>
+                    <p class="small text-muted mb-3">Members: {{ hub.members.count }}</p>
+                    <a href="{% url 'join_group' hub.pk %}" class="btn btn-primary rounded-pill px-4">Join group</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="card feature-card p-5 text-center">
+                <h3 class="h5">No groups available yet</h3>
+                <p class="text-secondary mb-0">Create new groups from the admin panel or return later for fresh communities.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

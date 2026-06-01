@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Detail</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <h1>Course Detail</h1>
+    <p>Viewing details for course ID: {{ course_id }}</p>
+    <p><a href="{% url 'dashboard' %}">Back to dashboard</a></p>
+</body>
+</html>

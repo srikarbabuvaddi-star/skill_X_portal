@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progress</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+    <h1 class="glitch">📊 Progress</h1>
+    <nav><a href="{% url 'home' %}">Home</a></nav>
+</header>
+<div class="container">
+    <canvas id="progressChart" width="400" height="200"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const progressChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Python', 'Django', 'CSS', 'JavaScript'],
+            datasets: [{
+                label: 'Skill Progress (%)',
+                data: [80, 60, 40, 20],  // Example values
+                backgroundColor: [
+                    '#ff00cc',
+                    '#3333ff',
+                    '#00ffcc',
+                    '#ffcc00'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { labels: { color: '#fff' } }
+            },
+            scales: {
+                x: { ticks: { color: '#fff' } },
+                y: { ticks: { color: '#fff' } }
+            }
+        }
+    });
+</script>
+</body>
+</html>

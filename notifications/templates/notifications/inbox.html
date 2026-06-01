@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="fw-bold">Notifications</h1>
+        <p class="text-secondary">Your latest alerts and updates are listed below.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        {% if pings %}
+            <div class="list-group">
+                {% for ping in pings %}
+                    <div class="list-group-item d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="mb-1">{{ ping.body }}</p>
+                            <small class="text-muted">Status: {{ ping.seen|yesno:'Seen,New' }}</small>
+                        </div>
+                        <span class="badge bg-{{ ping.seen|yesno:'secondary,primary' }} rounded-pill">{{ ping.id }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card feature-card p-5 text-center">
+                <h3 class="h5">No notifications yet</h3>
+                <p class="text-secondary mb-0">Once activity happens, alerts will appear here.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

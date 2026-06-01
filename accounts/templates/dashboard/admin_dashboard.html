@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2>Welcome, {{ user.username }} (Administrator)</h2>
+
+    <div class="dashboard-section">
+        <h3>User Management</h3>
+        <p>Total Users: {{ user_count }}</p>
+        <ul>
+            <li><a href="{% url 'manage_users' %}">View All Users</a></li>
+            <li><a href="{% url 'create_user' %}">Add New User</a></li>
+        </ul>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>Courses Overview</h3>
+        <p>Total Courses: {{ course_count }}</p>
+        <ul>
+            <li><a href="{% url 'manage_courses' %}">Manage Courses</a></li>
+            <li><a href="{% url 'create_course' %}">Create New Course</a></li>
+        </ul>
+    </div>
+
+    <div class="dashboard-section">
+        <h3>Reports & Analytics</h3>
+        {% if reports %}
+            <ul>
+                {% for report in reports %}
+                    <li>
+                        {{ report.title }} — {{ report.date|date:"M d, Y" }}
+                        <a href="{% url 'report_detail' report.id %}">View</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reports available yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="dashboard-section">
+        <h3>System Notifications</h3>
+        {% if notifications %}
+            <ul>
+                {% for notification in notifications %}
+                    <li>{{ notification.message }} — {{ notification.date|date:"M d, Y H:i" }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No new notifications.</p>
+        {% endif %}
+    </div>
+
+    <div class="dashboard-section">
+        <h3>Settings</h3>
+        <ul>
+            <li><a href="{% url 'site_settings' %}">Site Settings</a></li>
+            <li><a href="{% url 'manage_roles' %}">Manage Roles & Permissions</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

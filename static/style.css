@@ -1,0 +1,95 @@
+body {
+    background: linear-gradient(145deg, #eef4ff 0%, #f8faff 40%, #ffffff 100%);
+    min-height: 100vh;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.card {
+    border-radius: 1.35rem;
+}
+
+.btn-primary {
+    background: #2b6cff;
+    border-color: #2b6cff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #2555d4;
+    border-color: #2555d4;
+}
+
+.btn-outline-dark {
+    border-color: rgba(33, 37, 41, 0.18);
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:focus {
+    background: rgba(33, 37, 41, 0.08);
+}
+
+.form-control,
+.form-select {
+    border-radius: 1rem;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2b6cff;
+    box-shadow: 0 0 0 0.15rem rgba(43, 108, 255, 0.2);
+}
+
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+footer {
+    border-top: 1px solid rgba(33, 37, 41, 0.08);
+}
+
+footer p,
+footer a {
+    font-size: 0.95rem;
+}
+
+.hover-light:hover {
+    color: #ffffff !important;
+}
+
+.bg-dark {
+    background-color: #1a1f2a !important;
+}
+
+.text-info {
+    color: #2b6cff !important;
+}
+
+.btn-info {
+    background-color: #dbe9ff;
+    border-color: #dbe9ff;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+    background-color: #c5dcff;
+}
+
+@media (max-width: 575.98px) {
+    .navbar {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+}

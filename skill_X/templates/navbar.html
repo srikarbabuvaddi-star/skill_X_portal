@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-gradient d-flex align-items-center" href="{% url 'dashboard' %}">
+            <i class="bi bi-cpu-fill text-info me-2"></i> Skill_X Portal
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'list_skills' %}"><i class="bi bi-journal-code me-1"></i> Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'calendar_matrix' %}"><i class="bi bi-calendar3 me-1"></i> Schedule</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'list_groups' %}"><i class="bi bi-people-fill me-1"></i> Groups</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'blog_list' %}"><i class="bi bi-newspaper me-1"></i> Articles</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'global_scoreboard' %}"><i class="bi bi-trophy-fill text-warning me-1"></i> Leaders</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'alert_inbox' %}" class="text-light position-relative me-2 decoration-none">
+                        <i class="bi bi-bell-fill fs-5 text-secondary hover-light"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle" style="width:8px; height:8px;"></span>
+                    </a>
+                    
+                    <a href="{% url 'view_and_edit_profile' %}" class="text-white text-decoration-none fw-medium small">
+                        Hi, <span class="text-info">{{ user.username }}</span>
+                    </a>
+                    
+                    <form action="{% url 'logout' %}" method="post" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">Exit</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-sm btn-outline-light rounded-pill px-3">Sign In</a>
+                    <a href="{% url 'register' %}" class="btn btn-sm btn-info text-dark fw-bold rounded-pill px-3">Join Us</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

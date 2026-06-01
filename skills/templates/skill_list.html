@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+        <h2 class="fw-bold text-dark m-0">Knowledge Asset Catalog</h2>
+        <p class="text-secondary m-0">Explore and search specialized skills added by verified peers.</p>
+    </div>
+    <a href="{% url 'create_skill' %}" class="btn btn-info text-dark fw-bold rounded-pill px-4 shadow-sm">
+        <i class="bi bi-plus-circle-fill me-2"></i>Share Your Skill
+    </a>
+</div>
+
+<form action="{% url 'dynamic_search_engine' %}" method="GET" class="mb-5">
+    <div class="input-group input-group-lg bg-white rounded-pill p-1 shadow-sm border">
+        <span class="input-group-text bg-transparent border-0 ps-3 text-secondary"><i class="bi bi-search"></i></span>
+        <input type="text" name="q" value="{{ term }}" class="form-control border-0 bg-transparent" placeholder="Query programming, digital arts, copywriting stacks...">
+        <button class="btn btn-dark rounded-pill px-4" type="submit">Query Database</button>
+    </div>
+</form>
+
+<div class="row g-4">
+    {% for skill in skills %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card glass-card shadow-sm h-100 border-0 p-3">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-bold text-dark mb-2">{{ skill.title }}</h5>
+                <p class="card-text text-secondary small flex-grow-1">{{ skill.description|truncatewords:25 }}</p>
+                
+                <div class="border-top pt-3 mt-3 d-flex justify-content-between align-items-center">
+                    <span class="text-muted extra-small"><i class="bi bi-person-badge"></i> Shared by: <strong>{{ skill.owner.username }}</strong></span>
+                    
+                    {% if skill.owner == request.user %}
+                        <div class="d-flex gap-1">
+                            <a href="{% url 'edit_skill' skill.id %}" class="btn btn-xs btn-outline-secondary py-1 px-2 rounded"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{% url 'delete_skill' skill.id %}" class="btn btn-xs btn-outline-danger py-1 px-2 rounded"><i class="bi bi-trash"></i></a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'access_chat_room' skill.id %}" class="btn btn-sm btn-dark rounded-pill px-3">Connect</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-5 bg-white rounded-4 border border-dashed">
+        <i class="bi bi-folder-x display-3 text-muted"></i>
+        <p class="text-secondary mt-3 m-0">No active skill components found inside your framework directory database tracker layer yet.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

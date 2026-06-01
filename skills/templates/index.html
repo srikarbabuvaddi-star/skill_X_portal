@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1 class="glitch">Level Up Your Skills!</h1>
+    <nav>
+        <a href="{% url 'skill_list' %}">Skills</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'profile' %}">Profile</a>
+    </nav>
+</header>
+<div class="container">
+    <h2>Manage your skills easily</h2>
+    <p>This app helps you track and organize skills with descriptions and details.</p>
+    <button onclick="window.location.href='{% url 'addskill' %}';">Add New Skill</button>
+</div>
+<div id="shareModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeShare()">&times;</span>
+        <h3>🌐 Share Your Skills</h3>
+        <p>Choose a platform:</p>
+        <button onclick="shareTwitter()">Twitter</button>
+        <button onclick="shareLinkedIn()">LinkedIn</button>
+        <button onclick="shareEmail()">Email</button>
+        <button onclick="shareWhatsApp()">WhatsApp</button>
+    </div>
+</div>
+
+<footer class="container">
+    <p>
+        <a href="{% url 'tracker' %}" class="footer-link">🚀 Track</a> • 
+        <a href="{% url 'progress' %}" class="footer-link">📊 Progress</a> • 
+        <a href="#" class="footer-link" onclick="openShare()">🌐 Share</a>
+    </p>
+</footer>
+
+<script>
+function openShare() {
+    document.getElementById('shareModal').style.display = 'block';
+}
+function closeShare() {
+    document.getElementById('shareModal').style.display = 'none';
+}
+function shareTwitter() {
+    window.open("https://twitter.com/intent/tweet?text=Check+out+my+skills!", "_blank");
+}
+function shareLinkedIn() {
+    window.open("https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:8000", "_blank");
+}
+function shareEmail() {
+    window.location.href = "mailto:?subject=My Skills&body=Check out my skills at http://localhost:8000";
+}
+</script>
+<script>
+function copyLink() {
+    const siteUrl = "http://localhost:8000";  // replace with your actual site URL when deployed
+    navigator.clipboard.writeText(siteUrl).then(() => {
+        alert("✅ Link copied to clipboard!");
+    }).catch(err => {
+        alert("❌ Failed to copy link: " + err);
+    });
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Inbox</h2>
+  <ul>
+    {% for msg in messages %}
+      <li><strong>{{ msg.sender }}</strong>: {{ msg.content }} <em>{{ msg.timestamp }}</em></li>
+    {% empty %}
+      <li>No messages yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

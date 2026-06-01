@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center mt-5">
+    <div class="col-lg-6">
+        <div class="card glass-card border-0 shadow-lg p-5">
+            <h1 class="display-5 fw-bold mb-3 text-dark">Welcome to Skill_X</h1>
+            <p class="lead text-secondary mb-4">A collaborative skill exchange platform where learners and providers connect, share, and grow.</p>
+            <div class="d-flex gap-3 flex-column flex-sm-row">
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg rounded-pill px-4">Create Account</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-dark btn-lg rounded-pill px-4">Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

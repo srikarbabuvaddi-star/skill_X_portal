@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Skill</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1 class="glitch">➕ Add Skill</h1>
+    <nav><a href="{% url 'skill_list' %}">Back to Skills</a></nav>
+    <h2>Add Skill</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+</header>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Skill</button>
+    </form>
+</div>
+</body>
+</html>

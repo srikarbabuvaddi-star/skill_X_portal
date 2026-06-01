@@ -1,0 +1,177 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: #0a0a0f;
+    color: #e0e0ff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(to right, #ff00cc, #3333ff);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 10px #00f, 0 0 20px #0ff;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+    background: rgba(20, 20, 40, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #d519b3, 0 0 40px #3333ff;
+}
+
+button {
+    background: linear-gradient(to right, #ff00cc, #3333ff);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-shadow: 0 0 5px #000;
+    transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #0ff;
+}
+
+/* Glitch animation */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.glitch:hover {
+    animation: glitch 0.3s infinite;
+
+    
+}
+
+.footer-link {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ff00cc;
+    text-shadow: 0 0 10px #ff00cc, 0 0 20px #0ff;
+}
+.hero {
+    text-align: center;
+    padding: 50px;
+    background: linear-gradient(to right, #ff00cc, #3333ff);
+    color: white;
+    border-radius: 12px;
+    margin: 20px auto;
+    box-shadow: 0 0 20px #0ff;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px auto;
+    width: 80%;
+}
+
+.feature-card {
+    background: rgba(20,20,40,0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 15px #ff00cc, 0 0 30px #3333ff;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: scale(1.1);
+    animation: glitch 0.3s infinite;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+.modal-content {
+    background: #111;
+    color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 20px #ff00cc, 0 0 40px #3333ff;
+}
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #3333ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background: #ff00cc;
+}
+button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #3333ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background: #ff00cc;
+}
+button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #3333ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background: #ff00cc;
+}
+
+
