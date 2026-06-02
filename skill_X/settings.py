@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!8opjhn85d6cl@4t86(wwxv3n2rp&h4vpx$dh&1s@@h50c8szd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]  # Allow all hosts for development, restrict in production
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "accounts",
     "blog",
+    "channels",
     "chat",
     "video",
     "events",
@@ -58,6 +59,12 @@ INSTALLED_APPS = [
 ]
 
 
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 
 MIDDLEWARE = [
