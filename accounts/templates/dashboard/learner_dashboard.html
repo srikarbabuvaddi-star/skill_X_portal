@@ -116,5 +116,40 @@
             {% endif %}
         </div>
     </div>
+
+    <div class="col-12">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-2">
+            <div>
+                <p class="section-chip mb-2"><i class="bi bi-grid-3x3-gap"></i> Apps</p>
+                <h3 class="fw-bold mb-0">All platform apps</h3>
+            </div>
+        </div>
+    </div>
+
+    {% for app in app_cards %}
+        <div class="col-sm-6 col-xl-3">
+            {% if app.available %}
+                <a href="{% url app.url_name %}" class="card feature-card h-100 p-4 text-decoration-none text-reset">
+                    <div class="d-flex align-items-start gap-3">
+                        <span class="section-chip p-2"><i class="bi {{ app.icon }}"></i></span>
+                        <div>
+                            <h4 class="h6 fw-bold mb-1">{{ app.title }}</h4>
+                            <p class="text-secondary small mb-0">{{ app.description }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <div class="card feature-card h-100 p-4 opacity-75">
+                    <div class="d-flex align-items-start gap-3">
+                        <span class="section-chip p-2"><i class="bi {{ app.icon }}"></i></span>
+                        <div>
+                            <h4 class="h6 fw-bold mb-1">{{ app.title }}</h4>
+                            <p class="text-secondary small mb-0">{{ app.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

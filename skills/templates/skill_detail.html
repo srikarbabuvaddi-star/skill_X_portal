@@ -1,21 +1,83 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ skill.name }}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <h1>{{ skill.name }}</h1>
-        <nav>
-            <a href="{% url 'skill_list' %}">Back to Skills</a>
-        </nav>
-    </header>
-    <div class="container">
-        <p>{{ skill.description }}</p>
-        <p><strong>Created at:</strong> {{ skill.created_at }}</p>
+{% extends 'base.html' %}
+
+{% block title %}{{ skill.title }} | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card feature-card p-4">
+            <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                <div>
+                    <p class="section-chip mb-3"><i class="bi bi-journal-code"></i> Skill</p>
+                    <h2 class="fw-bold mb-2">{{ skill.title }}</h2>
+                    <p class="text-secondary mb-0">Shared by {{ skill.owner.username }} on {{ skill.created_at|date:"M d, Y" }}</p>
+                </div>
+                <a href="{% url 'list_skills' %}" class="btn btn-outline-secondary rounded-pill px-3">Back</a>
+            </div>
+
+            <p class="lead text-secondary">{{ skill.description }}</p>
+
+            {% if delete_prompt %}
+                <form method="post" class="alert alert-danger mt-4">
+                    {% csrf_token %}
+                    <h3 class="h5 fw-bold">Delete this skill?</h3>
+                    <p>This action removes the skill from the catalog.</p>
+                    <button class="btn btn-danger" type="submit">Confirm delete</button>
+                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            {% endif %}
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+                {% if skill.owner == request.user %}
+                    <a href="{% url 'edit_skill' skill.id %}" class="btn btn-dark rounded-pill px-4">Edit</a>
+                    <a href="{% url 'delete_skill' skill.id %}" class="btn btn-outline-danger rounded-pill px-4">Delete</a>
+                {% else %}
+                    <a href="{% url 'access_chat_room' skill.id %}" class="btn btn-dark rounded-pill px-4">Connect</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+    <div class="col-lg-4">
+        <div class="card feature-card p-4">
+            <h3 class="h5 fw-bold mb-3">Reviews</h3>
+            {% if skill.ratings.all %}
+                <div class="list-group list-group-flush mb-4">
+                    {% for review in skill.ratings.all %}
+                        <div class="list-group-item px-0">
+                            <div class="d-flex justify-content-between">
+                                <strong>{{ review.reviewer.username }}</strong>
+                                <span class="badge bg-warning text-dark">{{ review.score }}/5</span>
+                            </div>
+                            <p class="small text-secondary mb-0">{{ review.comment }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-secondary">No reviews yet.</p>
+            {% endif %}
+
+            <form method="post" action="{% url 'submit_feedback' skill.id %}" class="row g-3">
+                {% csrf_token %}
+                <div class="col-12">
+                    <label for="score" class="form-label">Score</label>
+                    <select id="score" name="score" class="form-select" required>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary w-100 rounded-pill" type="submit">Submit review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

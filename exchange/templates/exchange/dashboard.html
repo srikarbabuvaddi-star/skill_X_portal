@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Skill Exchange | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card feature-card p-4 h-100">
+            <h2 class="h4 fw-bold mb-3">Create swap proposal</h2>
+            <form method="post" class="row g-3">
+                {% csrf_token %}
+                <div class="col-12">
+                    <label for="receiver" class="form-label">Receiver</label>
+                    <select id="receiver" name="receiver" class="form-select" required>
+                        <option value="">Choose a user</option>
+                        {% for user_item in users %}
+                            <option value="{{ user_item.id }}">{{ user_item.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12">
+                    {{ form.as_p }}
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-dark rounded-pill px-4" type="submit">Send proposal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card feature-card p-4 mb-4">
+            <h2 class="h4 fw-bold mb-3">Received proposals</h2>
+            {% if received %}
+                <div class="list-group list-group-flush">
+                    {% for proposal in received %}
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <strong>{{ proposal.sender.username }}</strong>
+                                    <p class="text-secondary small mb-1">{{ proposal.offered_skill }} for {{ proposal.requested_skill }}</p>
+                                    <span class="badge bg-secondary">{{ proposal.status }}</span>
+                                </div>
+                                {% if proposal.status == 'PENDING' %}
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'evaluate_proposal' proposal.id 'accept' %}" class="btn btn-sm btn-success">Accept</a>
+                                        <a href="{% url 'evaluate_proposal' proposal.id 'reject' %}" class="btn btn-sm btn-outline-danger">Reject</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-secondary mb-0">No proposals received yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="card feature-card p-4">
+            <h2 class="h4 fw-bold mb-3">Sent proposals</h2>
+            {% if sent %}
+                <div class="list-group list-group-flush">
+                    {% for proposal in sent %}
+                        <div class="list-group-item d-flex justify-content-between">
+                            <span>{{ proposal.offered_skill }} for {{ proposal.requested_skill }} to {{ proposal.receiver.username }}</span>
+                            <span class="badge bg-secondary">{{ proposal.status }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-secondary mb-0">No proposals sent yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -13,4 +13,4 @@ def view_and_edit_profile(request):
             return redirect('view_and_edit_profile')
     else:
         form = ProfileMetadataForm(instance=meta)
-    return render(request, 'skills/profile.html', {'form': form, 'meta': meta})
+    return render(request, 'profile/profile.html', {'form': form, 'meta': meta})

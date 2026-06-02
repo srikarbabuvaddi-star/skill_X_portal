@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card feature-card p-4">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <img src="{{ meta.avatar_link }}" alt="{{ request.user.username }}" class="rounded-circle" width="72" height="72">
+                <div>
+                    <h2 class="fw-bold mb-1">{{ request.user.username }}</h2>
+                    <p class="text-secondary mb-0">{{ request.user.email|default:"No email set" }}</p>
+                </div>
+            </div>
+
+            <form method="post" class="row g-3">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="col-12 text-end">
+                    <button class="btn btn-primary rounded-pill px-4" type="submit">Save profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

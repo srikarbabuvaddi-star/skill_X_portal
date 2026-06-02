@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviews | Skill_X{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card feature-card p-4 h-100">
+            <h2 class="h4 fw-bold mb-3">Reviewable skills</h2>
+            {% if skills %}
+                <div class="list-group">
+                    {% for skill in skills %}
+                        <a href="{% url 'skill_detail' skill.id %}" class="list-group-item list-group-item-action">
+                            <strong>{{ skill.title }}</strong>
+                            <small class="text-secondary d-block">Shared by {{ skill.owner.username }}</small>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-secondary mb-0">No skills are available for review yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card feature-card p-4 h-100">
+            <h2 class="h4 fw-bold mb-3">Recent reviews</h2>
+            {% if reviews %}
+                <div class="list-group list-group-flush">
+                    {% for review in reviews %}
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <strong>{{ review.skill.title }}</strong>
+                                <span class="badge bg-warning text-dark">{{ review.score }}/5</span>
+                            </div>
+                            <p class="text-secondary small mb-1">{{ review.comment }}</p>
+                            <small class="text-muted">By {{ review.reviewer.username }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-secondary mb-0">No reviews submitted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

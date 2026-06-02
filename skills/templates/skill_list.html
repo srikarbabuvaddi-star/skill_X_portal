@@ -30,14 +30,15 @@
                 <div class="border-top pt-3 mt-3 d-flex justify-content-between align-items-center">
                     <span class="text-muted extra-small"><i class="bi bi-person-badge"></i> Shared by: <strong>{{ skill.owner.username }}</strong></span>
                     
-                    {% if skill.owner == request.user %}
-                        <div class="d-flex gap-1">
+                    <div class="d-flex gap-1">
+                        <a href="{% url 'skill_detail' skill.id %}" class="btn btn-sm btn-outline-primary rounded-pill px-3">View</a>
+                        {% if skill.owner == request.user %}
                             <a href="{% url 'edit_skill' skill.id %}" class="btn btn-xs btn-outline-secondary py-1 px-2 rounded"><i class="bi bi-pencil-square"></i></a>
                             <a href="{% url 'delete_skill' skill.id %}" class="btn btn-xs btn-outline-danger py-1 px-2 rounded"><i class="bi bi-trash"></i></a>
-                        </div>
-                    {% else %}
-                        <a href="{% url 'access_chat_room' skill.id %}" class="btn btn-sm btn-dark rounded-pill px-3">Connect</a>
-                    {% endif %}
+                        {% else %}
+                            <a href="{% url 'access_chat_room' skill.id %}" class="btn btn-sm btn-dark rounded-pill px-3">Connect</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

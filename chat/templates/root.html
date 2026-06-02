@@ -43,7 +43,8 @@
     const user = "{{ request.user.username }}";
     
     // Core dynamic pipeline script link layer for ASGI mapping loops
-    const ws = new WebSocket((window.location.protocol === 'https:') ? 'wss://' : 'ws://' + window.location.host + '/ws/chat/' + token + '/');
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const ws = new WebSocket(wsProtocol + window.location.host + '/ws/chat/' + token + '/');
     const box = document.getElementById('chat-scroller');
     box.scrollTop = box.scrollHeight;
 
@@ -65,7 +66,7 @@
     document.getElementById('msg-send-btn').onclick = function() {
         const input = document.getElementById('msg-input');
         if(!input.value.trim()) return;
-        ws.send(json.stringify({ 'message': input.value, 'username': user }));
+        ws.send(JSON.stringify({ 'message': input.value, 'username': user }));
         input.value = '';
     };
 </script>
